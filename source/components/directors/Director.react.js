@@ -1,4 +1,5 @@
 var React = require('react');
+var DirectorsActions = require('../../actions/DirectorsActions');
 
 var Director = React.createClass({
 
@@ -10,17 +11,20 @@ var Director = React.createClass({
       onDirectorClick(director.id);
     }
   },
-
+  removeDirector: function () {
+    DirectorsActions.removeDirectorFromCollection(this.props.director.id);
+  },
   render: function () {
     return (
-      <tr onClick={this.onRowClick}>
-        <td className="director-attr">{this.props.director.name}</td>
-        <td className="director-attr">{this.props.director.sex}</td>
-        <td className="director-attr">{this.props.director.nationality}</td>
-        <td className="director-attr">{this.props.director.city}</td>
-        <td className="director-attr">{this.props.director.dob}</td>
-        <td className="director-attr">{this.props.director.age}</td>
-        <td className="director-attr">{this.props.director.blockbuster}</td>
+      <tr>
+        <td onClick={this.onRowClick} className="director-attr">{this.props.director.name}</td>
+        <td onClick={this.onRowClick} className="director-attr">{this.props.director.sex}</td>
+        <td onClick={this.onRowClick} className="director-attr">{this.props.director.nationality}</td>
+        <td onClick={this.onRowClick} className="director-attr">{this.props.director.city}</td>
+        <td onClick={this.onRowClick} className="director-attr">{this.props.director.dob}</td>
+        <td onClick={this.onRowClick} className="director-attr">{this.props.director.age}</td>
+        <td onClick={this.onRowClick} className="director-attr">{this.props.director.blockbuster}</td>
+        <td className="director-attr"><button onClick={this.removeDirector}><span className="glyphicon glyphicon-trash"></span></button></td>
       </tr>
     );
   }

@@ -3,6 +3,7 @@ var _ = require('lodash');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 var director = require('./director.json');
+var directorConstants = require('../constants/directorConstants');
 var directors = require('./directors.json');
 
 function emitChange() {
@@ -44,28 +45,13 @@ function setDirector(receivedDirector) {
 }
 
 function removeDirector(directorId) {
-  directors = _.without(directors, _.findWhere(directors, { id : directorId}));
+  directors = _.without(directors, _.find(directors, function (director) { return director.id === directorId}));
 }
 
-function updateDirector(director) {
-  var directorToUpdate = _.findWhere(directors, { id: director.id});
-  _.map(directorToUpdate, function (val, key) {
-    directorToUpdate[key] = director[key];
-  });
-}
 function handleAction(action) {
-  switch (action.actionType) {
-    case directorConstants.DIRECTOR_RECEIVE:
-      setDirector(action.director);
-      emitChange();
-      break;
+  switch (action.type) {
     case directorConstants.DIRECTOR_REMOVE:
-      removeDirector(action.director);
-      emitChange();
-      break;
-    default:
-    case directorConstants.DIRECTOR_UPDATE:
-      updateDirector(action.director);
+      removeDirector(action.directorId);
       emitChange();
       break;
     default:

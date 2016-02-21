@@ -37,6 +37,7 @@ var DirectorList = React.createClass({
             <th>dob</th>
             <th>age</th>
             <th>blockbuster</th>
+            <th>options</th>
           </tr>
         </thead>
         <tbody>

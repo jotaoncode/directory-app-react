@@ -25,14 +25,11 @@ var Application = React.createClass({
   componentWillUnmount: function() {
     DirectorsStore.removeChangeListener(this._onChange);
   },
-  getDirectorsState: function (state) {
-    this.setState(state);
-  },
   /**
    * Event handler for 'change' events coming from the DirectorsState
    */
   _onChange: function() {
-    this.setState(getDirectorsState());
+    this.setState(getAllDirectors());
   },
   render: function () {
     return (
